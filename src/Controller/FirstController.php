@@ -24,7 +24,6 @@ class FirstController extends AbstractController
         )] //attribute not an annotation
     public function multiplication($entier1, $entier2): Response
     {
-
         $result = $entier1 * $entier2;
         return new Response("<h1>$result</h1>");
     }
