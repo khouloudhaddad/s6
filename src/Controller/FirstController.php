@@ -18,9 +18,9 @@ class FirstController extends AbstractController
     }
 
     #[Route(
-        '/multi/{entier1}/{entier2}',
+        '/multi/{entier1<\d+>}/{entier2<\d+>}',
         name: 'multiplication',
-        requirements: ['entier1'=>'\d+', 'entier2'=>'\d+']
+        
         )] //attribute not an annotation
     public function multiplication($entier1, $entier2): Response
     {
