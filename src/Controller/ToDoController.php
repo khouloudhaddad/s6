@@ -55,4 +55,29 @@ class ToDoController extends AbstractController
 
         return $this->redirectToRoute('todo');
     }
+
+    //Update a Todo
+    #[Route('/todo/update/{name}/{content}', name: 'todo.update')]
+    public function updateToDo(Request $request, $name, $content)
+    {
+
+        $session = $request->getSession();
+
+        if ($session->has('todos')) {
+
+            $todos = $session->get('todos');
+            if(!isset($todos[$name])){
+                $this->addFlash('danger', "La liste des todo ne contient pas ce ToDo d'id $name");
+            }else{
+                $todos[$name] = $content;
+                $session->set('todos', $todos);
+
+                $this->addFlash('success', "le ToDo d'id $name a été mis à jour avec succès");
+            }
+        } else {
+            $this->addFlash('danger', "La liste des todo n'est pas encore initialisée");
+        }
+
+        return $this->redirectToRoute('todo');
+    }
 }
