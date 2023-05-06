@@ -9,11 +9,29 @@
 </style>
 
 <div class="example-wrapper">
+    {% for message in app.session.flashBag.get('info') %}
+        <div class="alert alert-info" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashBag.get('danger') %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <h1>ToDo Liste</h1>
-    <ol>
+    <ul  class="list-group">
     {% for cle, element in (app.session.get('todos')) %}
-        <li>
-        <b>{{cle}}</b> <br/> {{element}}
+        <li class="list-group-item">
+        <b>{{cle}}</b> : {{element}}
         </li>
     {% endfor %}
     </ol>
